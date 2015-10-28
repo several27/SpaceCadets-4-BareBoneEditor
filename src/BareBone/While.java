@@ -31,6 +31,9 @@ public class While implements Statement
 				{
 					childScope.index = startLine;
 					endLine = childScope.execute();
+
+					if (endLine == startLine)
+						break;
 				}
 
 				scope.index = endLine;

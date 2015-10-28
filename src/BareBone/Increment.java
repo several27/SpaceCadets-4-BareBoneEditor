@@ -21,6 +21,7 @@ public class Increment implements Statement
 			variable.setValue(variable.getValue().add(BigInteger.ONE));
 
 			System.out.println(variable.getName() + " incremented to " + variable.getValue());
+			Debug.addMessage(variable.getName() + " incremented to " + variable.getValue());
 		}
 	}
 }

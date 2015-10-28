@@ -1,4 +1,4 @@
-package sample;
+package Editor;
 
 import javafx.scene.layout.Region;
 import org.fxmisc.richtext.CodeArea;

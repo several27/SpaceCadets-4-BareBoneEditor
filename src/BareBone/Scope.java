@@ -20,7 +20,6 @@ public class Scope
 		availableStatements.add(Decrement.class);
 	}
 
-	private ArrayList<Statement> statements = new ArrayList<>();
 	public  ArrayList<Variable>  variables  = new ArrayList<>();
 	private Scope parentScope;
 
@@ -29,6 +28,7 @@ public class Scope
 
 	public Scope()
 	{
+
 	}
 
 	public Scope(Scope parentScope)
@@ -84,6 +84,8 @@ public class Scope
 		{
 			String statement = statements[index];
 
+			boolean statementRecognized = false;
+
 			for (Class<?extends Statement> availableStatement : availableStatements)
 			{
 				String regex = (String) availableStatement.getDeclaredField("regexPattern").get(null);
@@ -99,6 +101,7 @@ public class Scope
 				{
 					Statement statementInstance = availableStatement.newInstance();
 					statementInstance.execute(statement, this);
+					statementRecognized = true;
 					break;
 				}
 			}
@@ -109,6 +112,9 @@ public class Scope
 //				System.out.println("End: " + index);
 				return index;
 			}
+
+			if (!statementRecognized)
+				System.out.println("Statement not recognized");
 
 			index++;
 		}

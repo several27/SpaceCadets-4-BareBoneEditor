@@ -21,6 +21,7 @@ public class Decrement implements Statement
 			variable.setValue(variable.getValue().subtract(BigInteger.ONE));
 
 			System.out.println(variable.getName() + " decremented to " + variable.getValue());
+			Debug.addMessage(variable.getName() + " decremented to " + variable.getValue());
 		}
 	}
 }

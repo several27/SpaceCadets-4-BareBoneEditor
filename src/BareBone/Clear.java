@@ -21,6 +21,7 @@ public class Clear implements Statement
 			scope.updateVariable(matcher.group(1), BigInteger.ZERO);
 
 			System.out.println(matcher.group(1) + " cleared");
+			Debug.addMessage(matcher.group(1) + " cleared");
 		}
 	}
 }
