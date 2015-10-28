@@ -38,76 +38,16 @@ public class Scope
 		this.index = parentScope.index;
 	}
 
-	public void updateVariable(String name, BigInteger value)
-	{
-		// look for variable in parent parent scope
-		// return method
-		if (parentScope != null && parentScope.parentScope != null)
-		{
-			for (Variable variable : parentScope.parentScope.variables)
-			{
-				if (variable.getName().equals(name))
-				{
-					variable.setValue(value);
-					return;
-				}
-			}
-		}
-
-		// if variable already exists in parent scope
-		// return method
-		if (parentScope != null)
-		{
-			for (Variable variable : parentScope.variables)
-			{
-				if (variable.getName().equals(name))
-				{
-					variable.setValue(value);
-					return;
-				}
-			}
-		}
-
-		// if variable already exists in current scope
-		// return method
-		for (Variable variable : variables)
-		{
-			if (variable.getName().equals(name))
-			{
-				variable.setValue(value);
-				return;
-			}
-		}
-
-		// if variable doesn't exist
-		variables.add(new Variable(name, value));
-	}
-
 	public Variable getVariable(String name)
 	{
-		// look for variable in parent parent scope
-		// return method
-		if (parentScope != null && parentScope.parentScope != null)
-		{
-			for (Variable variable : parentScope.parentScope.variables)
-			{
-				if (variable.getName().equals(name))
-				{
-					return variable;
-				}
-			}
-		}
-
-		// look for variable in parent scope
+		// look for variable recursively
 		// return method
 		if (parentScope != null)
 		{
-			for (Variable variable : parentScope.variables)
+			Variable variable = parentScope.getVariable(name);
+			if (variable != null)
 			{
-				if (variable.getName().equals(name))
-				{
-					return variable;
-				}
+				return variable;
 			}
 		}
 
@@ -121,6 +61,19 @@ public class Scope
 		}
 
 		return null;
+	}
+
+	public void updateVariable(String name, BigInteger value)
+	{
+		Variable variable = getVariable(name);
+		if (variable == null)
+		{
+			variables.add(new Variable(name, value));
+		}
+		else
+		{
+			variable.setValue(value);
+		}
 	}
 
 	public int execute() throws Exception

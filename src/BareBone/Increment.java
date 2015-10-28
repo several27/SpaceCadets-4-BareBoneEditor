@@ -20,7 +20,7 @@ public class Increment implements Statement
 			variable = scope.getVariable(matcher.group(1));
 			variable.setValue(variable.getValue().add(BigInteger.ONE));
 
-			System.out.println(variable.getName() + " incremented to " + variable.getBinaryValue());
+			System.out.println(variable.getName() + " incremented to " + variable.getValue());
 		}
 	}
 }

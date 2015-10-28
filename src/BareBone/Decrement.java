@@ -20,7 +20,7 @@ public class Decrement implements Statement
 			variable = scope.getVariable(matcher.group(1));
 			variable.setValue(variable.getValue().subtract(BigInteger.ONE));
 
-			System.out.println(variable.getName() + " decremented to " + variable.getBinaryValue());
+			System.out.println(variable.getName() + " decremented to " + variable.getValue());
 		}
 	}
 }
