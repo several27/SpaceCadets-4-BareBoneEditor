@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class While implements Statement
 {
 	public static final String name         = "while";
-	public static final String regexPattern = "while\\s*([a-zA-z])\\s*not\\s*0\\s*do";
+	public static final String regexPattern = "while\\s*([a-zA-z]*)\\s*not\\s*0\\s*do";
 
 	private Variable variable;
 
@@ -18,6 +18,13 @@ public class While implements Statement
 		while (matcher.find())
 		{
 			variable = scope.getVariable(matcher.group(1));
+
+			if (variable == null)
+			{
+				scope.updateVariable(matcher.group(1), BigInteger.ZERO);
+				variable = scope.getVariable(matcher.group(1));
+			}
+
 			try
 			{
 				scope.index++;

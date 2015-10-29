@@ -60,9 +60,6 @@ public class Main extends Application
 
 	    Menu codeSamplesMenu = new Menu("Code Samples");
 	    MenuItem loopMenuItem = new MenuItem("Simple Loop");
-	    loopMenuItem.setOnAction(e -> {
-
-	    });
 	    MenuItem multiplyMenuItem = new MenuItem("Multiply X * Y");
 	    codeSamplesMenu.getItems().addAll(loopMenuItem, multiplyMenuItem);
 
@@ -97,6 +94,7 @@ public class Main extends Application
 	    newMenuItem.setOnAction(event -> {
 		    codeArea.replaceText(0, codeArea.getLength(), "");
 		    debugArea.replaceText(0, debugArea.getLength(), "");
+//		    Process.exec(javaExecutable, "-classpath", urls.join(":"), CLASS_TO_BE_EXECUTED)
 	    });
 
 	    openMenuItem.setOnAction(event -> {

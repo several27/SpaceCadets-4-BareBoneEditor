@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Decrement implements Statement
 {
 	public static final String name         = "decr";
-	public static final String regexPattern = "decr\\s*([a-zA-Z])";
+	public static final String regexPattern = "decr\\s*([a-zA-Z]*)";
 
 	private Variable variable;
 
@@ -18,6 +18,13 @@ public class Decrement implements Statement
 		while (matcher.find())
 		{
 			variable = scope.getVariable(matcher.group(1));
+
+			if (variable == null)
+			{
+				scope.updateVariable(matcher.group(1), BigInteger.ZERO);
+				variable = scope.getVariable(matcher.group(1));
+			}
+
 			variable.setValue(variable.getValue().subtract(BigInteger.ONE));
 
 			System.out.println(variable.getName() + " decremented to " + variable.getValue());

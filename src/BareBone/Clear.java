@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Clear implements Statement
 {
 	public static final String name         = "clear";
-	public static final String regexPattern = "clear\\s*([a-zA-Z])\\s*";
+	public static final String regexPattern = "clear\\s*([a-zA-Z]*)\\s*";
 
 	private Variable variable;
 
